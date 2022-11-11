@@ -1,0 +1,128 @@
+package vista;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import utils.HiloTiempo;
+
+import java.awt.Toolkit;
+
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Logueo extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JTextField txtUsuario;
+	private JPasswordField txtClave;
+	public static Logueo frame;
+	private JButton btnAceptar;
+	private JLabel lblMensaje;
+	public static JLabel lblTiempo;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new Logueo();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Logueo() {
+
+		setTitle("FAUNA HEALTH - Acceso al Sistema");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 363, 233);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblUsuario = new JLabel("Usuario :");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsuario.setBounds(114, 36, 96, 20);
+		contentPane.add(lblUsuario);
+		
+		JLabel lblClave = new JLabel("Contrase\u00F1a:");
+		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblClave.setBounds(114, 83, 96, 20);
+		contentPane.add(lblClave);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(205, 36, 103, 22);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		txtClave = new JPasswordField();
+		txtClave.setBounds(205, 80, 103, 20);
+		contentPane.add(txtClave);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setBounds(114, 116, 89, 23);
+		contentPane.add(btnAceptar);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnSalir.setBounds(226, 116, 89, 23);
+		contentPane.add(btnSalir);
+		
+		lblMensaje = new JLabel("Esta ventana se cerrar\u00E1 en");
+		lblMensaje.setBounds(77, 11, 154, 14);
+		contentPane.add(lblMensaje);
+		
+		lblTiempo = new JLabel("0 s");
+		lblTiempo.setBounds(237, 11, 46, 14);
+		contentPane.add(lblTiempo);
+		
+		//Llamar al conteo
+		iniciarConteo();
+	}
+	
+	//iniciar conteo
+	private void iniciarConteo() {
+		// llamar al proceso , hacer una instancia
+		HiloTiempo h = new HiloTiempo();
+		//ejecutar el proceso
+		h.start();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(e);
+		}
+	}
+	protected void actionPerformedBtnAceptar(ActionEvent e) {
+		FrmPreLoader pre = new FrmPreLoader();
+		pre.setVisible(true);
+		pre.setLocationRelativeTo(this);
+		this.dispose();
+		
+	}
+}
