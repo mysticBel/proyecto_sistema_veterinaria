@@ -14,7 +14,7 @@ public class MySQLConexion8 {
 			
 			//datos para establecer la conecion a la bd
 			//		driver:protocoloDriver://ubicacion&puertodeConexion/nombreBD?datos de actualizacion-timezone
-			String url = "jdbc:mysql://localhost:3306/ciberfarma?serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/veterinaria?serverTimezone=UTC";
 			String usr = "root";
 			String psw = "1234";
 			// se envia los datos, si son correctos, cambia este objeto a 1, y se establece la conexion

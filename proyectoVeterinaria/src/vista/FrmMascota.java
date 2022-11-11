@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +31,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
-public class FrmMascota extends JFrame implements ActionListener, KeyListener, MouseListener {
+public class FrmMascota extends JInternalFrame implements ActionListener, KeyListener, MouseListener {
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;

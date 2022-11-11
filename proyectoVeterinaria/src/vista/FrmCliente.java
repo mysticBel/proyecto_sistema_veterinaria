@@ -34,7 +34,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 
-public class FrmCliente extends JFrame implements ActionListener {
+public class FrmCliente extends JInternalFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField txtDni;
@@ -57,8 +57,9 @@ public class FrmCliente extends JFrame implements ActionListener {
 	private JTextField txtTelefono;
 	private JComboBox cboDistrito;
 	private JTable tblCliente;
-	private JScrollPane scrollPane;
 	private JButton btnEncenderCaja;
+	private JScrollPane scrollPane;
+	private JButton btnNuevo;
 
 	/**
 	 * Launch the application.
@@ -80,17 +81,20 @@ public class FrmCliente extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public FrmCliente() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 564, 479);
+		setTitle("Mantenimiento de Clientes");
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
+		setBounds(100, 100, 746, 349);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistroDeUsuario = new JLabel("Registro de Cliente");
+		JLabel lblRegistroDeUsuario = new JLabel("Mantenimiento de Clientes");
 		lblRegistroDeUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblRegistroDeUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistroDeUsuario.setBounds(68, 0, 414, 32);
+		lblRegistroDeUsuario.setBounds(148, 0, 414, 32);
 		contentPane.add(lblRegistroDeUsuario);
 		
 		JLabel lblCodigo = new JLabel("Cod. Cliente:");
@@ -98,38 +102,38 @@ public class FrmCliente extends JFrame implements ActionListener {
 		contentPane.add(lblCodigo);
 		
 		JLabel lblDni = new JLabel("DNI:");
-		lblDni.setBounds(10, 82, 74, 14);
+		lblDni.setBounds(10, 147, 74, 14);
 		contentPane.add(lblDni);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(288, 43, 74, 14);
+		lblNombre.setBounds(10, 82, 74, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
-		lblApellido.setBounds(288, 82, 74, 14);
+		lblApellido.setBounds(10, 118, 74, 14);
 		contentPane.add(lblApellido);
 		
 		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
-		lblTelefono.setBounds(10, 118, 74, 14);
+		lblTelefono.setBounds(10, 172, 74, 14);
 		contentPane.add(lblTelefono);
 		
 		JLabel lblDireccion = new JLabel("Direcci\u00F3n");
-		lblDireccion.setBounds(288, 118, 74, 14);
+		lblDireccion.setBounds(10, 231, 74, 14);
 		contentPane.add(lblDireccion);
 		
 		txtDni = new JTextField();
-		txtDni.setBounds(94, 79, 130, 20);
+		txtDni.setBounds(94, 141, 130, 20);
 		contentPane.add(txtDni);
 		txtDni.setColumns(10);
 		
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(352, 43, 130, 20);
+		txtNombre.setBounds(94, 79, 130, 20);
 		contentPane.add(txtNombre);
 		
 		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
-		txtApellido.setBounds(352, 79, 130, 20);
+		txtApellido.setBounds(94, 110, 130, 20);
 		contentPane.add(txtApellido);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -138,17 +142,17 @@ public class FrmCliente extends JFrame implements ActionListener {
 				registrarDatos();
 			}
 		});
-		btnRegistrar.setBounds(94, 406, 103, 23);
+		btnRegistrar.setBounds(372, 263, 103, 23);
 		contentPane.add(btnRegistrar);
 		
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(379, 406, 103, 23);
+		btnEliminar.setBounds(598, 263, 103, 23);
 		contentPane.add(btnEliminar);
 		
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(this);
-		btnActualizar.setBounds(245, 406, 103, 23);
+		btnActualizar.setBounds(485, 263, 103, 23);
 		contentPane.add(btnActualizar);
 		
 		txtCodigo = new JTextField();
@@ -157,30 +161,22 @@ public class FrmCliente extends JFrame implements ActionListener {
 		contentPane.add(txtCodigo);
 		
 		txtDireccion = new JTextField();
-		txtDireccion.setBounds(352, 115, 150, 20);
+		txtDireccion.setBounds(94, 228, 153, 20);
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
 		lblDistrito = new JLabel("Distrito:");
-		lblDistrito.setBounds(10, 161, 74, 14);
+		lblDistrito.setBounds(10, 201, 74, 14);
 		contentPane.add(lblDistrito);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(94, 115, 130, 20);
+		txtTelefono.setBounds(94, 169, 130, 20);
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
 		cboDistrito = new JComboBox();
-		cboDistrito.setBounds(94, 157, 153, 22);
+		cboDistrito.setBounds(94, 197, 153, 22);
 		contentPane.add(cboDistrito);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 186, 528, 206);
-		contentPane.add(scrollPane);
-		
-		tblCliente = new JTable();
-		tblCliente.setFillsViewportHeight(true);
-		scrollPane.setViewportView(tblCliente);
 		//Agregando columnas a la tabla
 		model.addColumn("Código Cliente");
 		model.addColumn("DNI");
@@ -189,8 +185,6 @@ public class FrmCliente extends JFrame implements ActionListener {
 		model.addColumn("Teléfono");
 		model.addColumn("Dirección");
 		model.addColumn("idDistrito");
-		//asociar tabla con objeto model
-		tblCliente.setModel(model);
 		//deshabilitar caja
 		txtCodigo.setEnabled(false);
 		
@@ -199,6 +193,20 @@ public class FrmCliente extends JFrame implements ActionListener {
 		btnEncenderCaja.setIcon(new ImageIcon(FrmCliente.class.getResource("/img/Bulb Idea.png")));
 		btnEncenderCaja.setBounds(191, 28, 36, 41);
 		contentPane.add(btnEncenderCaja);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(270, 43, 427, 189);
+		contentPane.add(scrollPane);
+		
+		tblCliente = new JTable();
+		scrollPane.setViewportView(tblCliente);
+		tblCliente.setFillsViewportHeight(true);
+		//asociar tabla con objeto model
+		tblCliente.setModel(model);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(259, 263, 103, 23);
+		contentPane.add(btnNuevo);
 		
 		//
 		cargarDataComboDistrito();

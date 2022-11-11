@@ -4,8 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.jvnet.substance.SubstanceLookAndFeel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,8 +28,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.CompoundBorder;
 
-public class FrmCita extends JFrame implements ActionListener {
+public class FrmCita extends JInternalFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -95,19 +100,30 @@ public class FrmCita extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public FrmCita() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 643, 623);
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setTitle("Registro de Citas");
+		try {
+			//look and feel
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.OfficeSilver2007Skin");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		setBounds(100, 100, 695, 422);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("C\u00F3digo de cita");
-		lblNewLabel.setBounds(10, 11, 80, 14);
+		lblNewLabel.setBounds(21, 14, 80, 14);
 		contentPane.add(lblNewLabel);
 		
 		txtCodeCita = new JTextField();
-		txtCodeCita.setBounds(102, 8, 86, 20);
+		txtCodeCita.setBounds(102, 11, 46, 20);
 		contentPane.add(txtCodeCita);
 		txtCodeCita.setColumns(10);
 		
@@ -133,7 +149,7 @@ public class FrmCita extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel_5);
 		
 		lblNewLabel_6 = new JLabel("Celular:");
-		lblNewLabel_6.setBounds(314, 98, 46, 14);
+		lblNewLabel_6.setBounds(250, 98, 46, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		txtCodeCliente = new JTextField();
@@ -142,7 +158,7 @@ public class FrmCita extends JFrame implements ActionListener {
 		txtCodeCliente.setColumns(10);
 		
 		lblDireccion = new JLabel("Direcci\u00F3n");
-		lblDireccion.setBounds(314, 123, 57, 14);
+		lblDireccion.setBounds(250, 123, 57, 14);
 		contentPane.add(lblDireccion);
 		
 		txtNombresCli = new JTextField();
@@ -161,118 +177,118 @@ public class FrmCita extends JFrame implements ActionListener {
 		txtDNICli.setColumns(10);
 		
 		txtCelCLI = new JTextField();
-		txtCelCLI.setBounds(370, 95, 86, 20);
+		txtCelCLI.setBounds(314, 95, 86, 20);
 		contentPane.add(txtCelCLI);
 		txtCelCLI.setColumns(10);
 		
 		txtCliDirec = new JTextField();
-		txtCliDirec.setBounds(370, 120, 86, 20);
+		txtCliDirec.setBounds(314, 120, 86, 20);
 		contentPane.add(txtCliDirec);
 		txtCliDirec.setColumns(10);
 		
 		cboDistrito = new JComboBox();
 		cboDistrito.setModel(new DefaultComboBoxModel(new String[] {"Seleccione...", "1", "2", "3"}));
-		cboDistrito.setBounds(370, 144, 99, 22);
+		cboDistrito.setBounds(314, 144, 86, 22);
 		contentPane.add(cboDistrito);
 		
 		lblNewLabel_7 = new JLabel("Distrito:");
-		lblNewLabel_7.setBounds(314, 148, 46, 14);
+		lblNewLabel_7.setBounds(250, 148, 46, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		lblNewLabel_8 = new JLabel("MASCOTA");
 		lblNewLabel_8.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		lblNewLabel_8.setBounds(10, 220, 93, 14);
+		lblNewLabel_8.setBounds(448, 71, 93, 14);
 		contentPane.add(lblNewLabel_8);
 		
 		lblNewLabel_9 = new JLabel("C\u00F3digo:");
-		lblNewLabel_9.setBounds(10, 245, 46, 14);
+		lblNewLabel_9.setBounds(448, 98, 46, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		lblNewLabel_10 = new JLabel("Nombre:");
-		lblNewLabel_10.setBounds(10, 278, 46, 14);
+		lblNewLabel_10.setBounds(448, 123, 46, 14);
 		contentPane.add(lblNewLabel_10);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(66, 245, 86, 20);
+		txtCodigo.setBounds(504, 95, 86, 20);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(66, 275, 86, 20);
+		txtNombre.setBounds(504, 120, 86, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtFechaNac = new JTextField();
-		txtFechaNac.setBounds(66, 306, 86, 20);
+		txtFechaNac.setBounds(504, 145, 86, 20);
 		contentPane.add(txtFechaNac);
 		txtFechaNac.setColumns(10);
 		
 		txtTipoMascota = new JTextField();
-		txtTipoMascota.setBounds(370, 242, 99, 20);
+		txtTipoMascota.setBounds(504, 170, 86, 20);
 		contentPane.add(txtTipoMascota);
 		txtTipoMascota.setColumns(10);
 		
 		lblNewLabel_11 = new JLabel("Fec.Nac");
-		lblNewLabel_11.setBounds(10, 309, 46, 14);
+		lblNewLabel_11.setBounds(448, 148, 46, 14);
 		contentPane.add(lblNewLabel_11);
 		
 		lblNewLabel_12 = new JLabel("ATENCI\u00D3N");
 		lblNewLabel_12.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		lblNewLabel_12.setBounds(10, 348, 125, 14);
+		lblNewLabel_12.setBounds(288, 213, 125, 14);
 		contentPane.add(lblNewLabel_12);
 		
 		lblNewLabel_13 = new JLabel("Servicio:");
-		lblNewLabel_13.setBounds(10, 373, 46, 14);
+		lblNewLabel_13.setBounds(21, 254, 46, 14);
 		contentPane.add(lblNewLabel_13);
 		
 		cboServicio = new JComboBox();
-		cboServicio.setBounds(89, 373, 99, 22);
+		cboServicio.setBounds(85, 250, 147, 22);
 		contentPane.add(cboServicio);
 		
 		lblNewLabel_14 = new JLabel("Costo:");
-		lblNewLabel_14.setBounds(314, 373, 46, 14);
+		lblNewLabel_14.setBounds(261, 254, 46, 14);
 		contentPane.add(lblNewLabel_14);
 		
-		lblNewLabel_15 = new JLabel("Tipo de Mascota");
-		lblNewLabel_15.setBounds(283, 245, 99, 14);
+		lblNewLabel_15 = new JLabel("Tipo ");
+		lblNewLabel_15.setBounds(448, 173, 99, 14);
 		contentPane.add(lblNewLabel_15);
 		
 		txtCosto = new JTextField();
-		txtCosto.setBounds(392, 370, 132, 20);
+		txtCosto.setBounds(316, 251, 132, 20);
 		contentPane.add(txtCosto);
 		txtCosto.setColumns(10);
 		
 		lblNewLabel_17 = new JLabel("Fecha cita:");
-		lblNewLabel_17.setBounds(314, 414, 68, 14);
+		lblNewLabel_17.setBounds(259, 287, 68, 14);
 		contentPane.add(lblNewLabel_17);
 		
 		txtFecha = new JDateChooser();
-		txtFecha.setBounds(392, 408, 132, 20);
+		txtFecha.setBounds(316, 282, 132, 20);
 		contentPane.add(txtFecha);
 		
 		lblNewLabel_18 = new JLabel("Veterinario");
-		lblNewLabel_18.setBounds(10, 414, 69, 14);
+		lblNewLabel_18.setBounds(21, 287, 69, 14);
 		contentPane.add(lblNewLabel_18);
 		
 		cboVeterinario = new JComboBox();
-		cboVeterinario.setBounds(89, 410, 99, 22);
+		cboVeterinario.setBounds(85, 283, 147, 22);
 		contentPane.add(cboVeterinario);
 		
 		lblNewLabel_16 = new JLabel("Detalles:");
-		lblNewLabel_16.setBounds(10, 459, 46, 14);
+		lblNewLabel_16.setBounds(479, 236, 46, 14);
 		contentPane.add(lblNewLabel_16);
 		
 		txtDetalles = new JTextField();
-		txtDetalles.setBounds(89, 456, 195, 65);
+		txtDetalles.setBounds(473, 254, 195, 48);
 		contentPane.add(txtDetalles);
 		txtDetalles.setColumns(10);
 		
 		btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBounds(133, 550, 89, 23);
+		btnRegistrar.setBounds(480, 337, 89, 23);
 		contentPane.add(btnRegistrar);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(367, 550, 89, 23);
+		btnCancelar.setBounds(579, 337, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		btnBuscarCliente = new JButton("");
@@ -283,7 +299,7 @@ public class FrmCita extends JFrame implements ActionListener {
 		
 		btnBuscarMascota = new JButton("");
 		btnBuscarMascota.setIcon(new ImageIcon(FrmCita.class.getResource("/img/Symbol Search.png")));
-		btnBuscarMascota.setBounds(160, 241, 68, 34);
+		btnBuscarMascota.setBounds(600, 98, 68, 34);
 		contentPane.add(btnBuscarMascota);
 	}
 	public void actionPerformed(ActionEvent e) {

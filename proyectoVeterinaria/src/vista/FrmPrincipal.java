@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.jvnet.substance.SubstanceLookAndFeel;
+
 import utils.HiloReloj;
 import utils.HiloTiempo;
 
@@ -28,6 +30,7 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Cursor;
 
 public class FrmPrincipal extends JFrame implements ActionListener {
 	private JMenuBar menuBar;
@@ -38,12 +41,13 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmClientesReporte;
 	private JMenuItem mntmVentasReporte;
 	private JMenuItem mntmClientes;
-	private JMenuItem mntmProductos;
+	private JMenuItem mntmMascotas;
 	private JDesktopPane escritorio;
 	public static JLabel lblHora;
 	private JMenu mnRegistro;
-	private JMenuItem mntmUsuarios;
+	private JMenuItem mntmRegistroCita;
 	private JLabel lblPortada;
+	private JMenuItem mntmVeterinarios;
 
 	/**
 	 * Launch the application.
@@ -65,17 +69,21 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public FrmPrincipal() {
-		// jtatoo
 		try {
-			// seleccionar el tipo de modelo de look and feel
-			UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+			//look and feel
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.OfficeSilver2007Skin");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
+		setFont(new Font("Tahoma", Font.PLAIN, 12));
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 839, 480);
+		setBounds(100, 100, 836, 510);
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -97,16 +105,20 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		mntmClientes.addActionListener(this);
 		mnMantenimiento.add(mntmClientes);
 		
-		mntmProductos = new JMenuItem("Productos");
-		mntmProductos.addActionListener(this);
-		mnMantenimiento.add(mntmProductos);
+		mntmMascotas = new JMenuItem("Mascotas");
+		mntmMascotas.addActionListener(this);
+		mnMantenimiento.add(mntmMascotas);
+		
+		mntmVeterinarios = new JMenuItem("Veterinarios");
+		mntmVeterinarios.addActionListener(this);
+		mnMantenimiento.add(mntmVeterinarios);
 		
 		mnRegistro = new JMenu("Registro");
 		menuBar.add(mnRegistro);
 		
-		mntmUsuarios = new JMenuItem("Usuarios");
-		mntmUsuarios.addActionListener(this);
-		mnRegistro.add(mntmUsuarios);
+		mntmRegistroCita = new JMenuItem("Nueva Cita");
+		mntmRegistroCita.addActionListener(this);
+		mnRegistro.add(mntmRegistroCita);
 		
 		mnReportes = new JMenu("Reportes");
 		mnReportes.setMnemonic('R');
@@ -121,7 +133,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		mnReportes.add(mntmVentasReporte);
 		
 		escritorio = new JDesktopPane();
-		escritorio.setBackground(SystemColor.activeCaption);
+		escritorio.setBackground(new Color(245, 245, 245));
 		getContentPane().add(escritorio, BorderLayout.CENTER);
 		
 		lblHora = new JLabel("hh:mm:ss");
@@ -132,7 +144,7 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		
 		lblPortada = new JLabel("");
 		lblPortada.setIcon(new ImageIcon(FrmPrincipal.class.getResource("/img/FH-principal.jpg")));
-		lblPortada.setBounds(0, -18, 902, 459);
+		lblPortada.setBounds(0, -18, 858, 489);
 		escritorio.add(lblPortada);
 		
 		//lamando al metodo
@@ -140,8 +152,11 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mntmUsuarios) {
-			actionPerformedMntmUsuarios(e);
+		if (e.getSource() == mntmVeterinarios) {
+			actionPerformedMntmVeterinarios(e);
+		}
+		if (e.getSource() == mntmRegistroCita) {
+			actionPerformedMntmNuevaCita(e);
 		}
 		if (e.getSource() == mntmClientes) {
 			actionPerformedMntmClientes(e);
@@ -149,8 +164,8 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		if (e.getSource() == mntmVentasReporte) {
 			actionPerformedMntmVentasReporte(e);
 		}
-		if (e.getSource() == mntmProductos) {
-			actionPerformedMntmProductos(e);
+		if (e.getSource() == mntmMascotas) {
+			actionPerformedMntmMascotas(e);
 		}
 		if (e.getSource() == mntmSalir) {
 			actionPerformedMntmSalir(e);
@@ -162,15 +177,15 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedMntmClientes(ActionEvent e) {
-		//FrmRegCli cli =new FrmRegCli();
-		//cli.setVisible(true);
-		//escritorio.add(cli);
+		FrmCliente cli =new FrmCliente();
+		cli.setVisible(true);
+		escritorio.add(cli);
 	}
 	
-	protected void actionPerformedMntmProductos(ActionEvent e) {
-		//FrmRegProd prod =new FrmRegProd();
-		//prod.setVisible(true);
-		//escritorio.add(prod);
+	protected void actionPerformedMntmMascotas(ActionEvent e) {
+		FrmMascota mas =new FrmMascota();
+		mas.setVisible(true);
+		escritorio.add(mas);
 	}
 	protected void actionPerformedMntmVentasReporte(ActionEvent e) {
 		//FrmRptVtas ven =new FrmRptVtas();
@@ -183,9 +198,14 @@ public class FrmPrincipal extends JFrame implements ActionListener {
 		HiloReloj h = new HiloReloj(lblHora);
 				h.start();
 	}
-	protected void actionPerformedMntmUsuarios(ActionEvent e) {
-		FrmRegistro regUser =new FrmRegistro();
-		regUser.setVisible(true);
-		escritorio.add(regUser);
+	protected void actionPerformedMntmNuevaCita(ActionEvent e) {
+		FrmCita regCita =new FrmCita();
+		regCita.setVisible(true);
+		escritorio.add(regCita);
+	}
+	protected void actionPerformedMntmVeterinarios(ActionEvent e) {
+		FrmVeterinario vet =new FrmVeterinario();
+		vet.setVisible(true);
+		escritorio.add(vet);
 	}
 }
