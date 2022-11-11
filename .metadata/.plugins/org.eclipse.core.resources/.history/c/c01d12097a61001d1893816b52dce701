@@ -15,7 +15,5 @@ public class Validaciones {
 	public static final String TELEF_CLIENTE ="[0][1]-\\d{3}\\s\\d{5}";
 	public static final String CORREO_CLIENTE ="[\\w] + [0-9]@[\\w]+\\.[a-z]{3}\\.[a-z][2]"; //jl12_5@cibertec.edu.pe
 	
-	public static final String CODIGOCLI ="[0-9]+";         //8 digitos del 0 al 9
-	
 	// [\\w] --> [a-zA-Z_0-9]
  }
